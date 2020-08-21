@@ -44,6 +44,22 @@ describe("/cards", () => {
       await expect(insertedArtistRecords.handsome).to.equal(6);
       await expect(insertedArtistRecords.alignment).to.equal("Neutral Evil");
     });
+
+    it("throws an error if card is OP", async () => {
+      const response = await request(app).post("/cards").send({
+        name: "Superman",
+        aka: "The Man of Steel",
+        cool: 10,
+        largeness: 10,
+        handsome: 10,
+        alignment: "Lawful Good",
+      });
+
+      await expect(response.status).to.equal(404);
+      await expect(response.body.error).to.equal(
+        "This card is too powerful! The maximum total for the numerical parameters is 25."
+      );
+    });
   });
 
   describe("with cards in the database", () => {
