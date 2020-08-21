@@ -3,6 +3,8 @@ module.exports = (connection, DataTypes) => {
     name: DataTypes.STRING,
     aka: DataTypes.STRING,
     cool: DataTypes.INTEGER,
+    largeness: DataTypes.INTEGER,
+    handsome: DataTypes.INTEGER,
     alignment: DataTypes.STRING,
   };
 
