@@ -22,6 +22,10 @@ exports.list = (req, res) => {
 exports.getCardById = (req, res) => {
   const { cardId } = req.params;
   Card.findByPk(cardId).then((card) => {
-    res.status(200).json(card);
+    if (!card) {
+      res.status(404).json({ error: "Card not found!" });
+    } else {
+      res.status(200).json(card);
+    }
   });
 };

@@ -132,6 +132,16 @@ describe("/cards", () => {
             done();
           });
       });
+
+      it("throws an error if card doesn't exist", (done) => {
+        request(app)
+          .get("/cards/1000")
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("Card not found!");
+            done();
+          });
+      });
     });
   });
 });
