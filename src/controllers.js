@@ -29,3 +29,14 @@ exports.getCardById = (req, res) => {
     }
   });
 };
+
+exports.updateCard = (req, res) => {
+  const { cardId } = req.params;
+  Card.update(req.body, { where: { id: cardId } }).then(([updatedCard]) => {
+    if (!updatedCard) {
+      res.status(404).json({ error: "Card not found!" });
+    } else {
+      res.status(200).json(updatedCard);
+    }
+  });
+};
