@@ -149,11 +149,11 @@ describe("/cards", () => {
         const card = cards[0];
         request(app)
           .patch(`/cards/${card.id}`)
-          .send({ cool: 5, alignment: "True Neutral" })
+          .send({ largeness: 5, alignment: "True Neutral" })
           .then((res) => {
             expect(res.status).to.equal(200);
             Card.findByPk(card.id, { raw: true }).then((updatedCard) => {
-              expect(updatedCard.cool).to.equal(5);
+              expect(updatedCard.largeness).to.equal(5);
               expect(updatedCard.alignment).to.equal("True Neutral");
               done();
             });
@@ -163,7 +163,31 @@ describe("/cards", () => {
       it("throws an error if card doesn't exist", (done) => {
         request(app)
           .patch("/cards/1000")
-          .send({ cool: 5, alignment: "True Neutral" })
+          .send({ largeness: 5, alignment: "True Neutral" })
+          .then((res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal("Card not found!");
+            done();
+          });
+      });
+    });
+    describe("DELETE /cards/:cardId", () => {
+      it("deletes card by id", (done) => {
+        const card = cards[0];
+        request(app)
+          .delete(`/cards/${card.id}`)
+          .then((res) => {
+            expect(res.status).to.equal(204);
+            Card.findByPk(card.id, { raw: true }).then((deletedCard) => {
+              expect(deletedCard).to.equal(null);
+              done();
+            });
+          });
+      });
+
+      it("throws an error if card doesn't exist", (done) => {
+        request(app)
+          .delete("/cards/9999")
           .then((res) => {
             expect(res.status).to.equal(404);
             expect(res.body.error).to.equal("Card not found!");
