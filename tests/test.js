@@ -116,5 +116,22 @@ describe("/cards", () => {
           });
       });
     });
+
+    describe("GET /cards/:cardId", () => {
+      it("gets singular card data by id", (done) => {
+        const card = cards[0];
+        request(app)
+          .get(`/cards/${card.id}`)
+          .then((res) => {
+            expect(res.status).to.equal(200);
+            expect(res.body.name).to.equal(card.name);
+            expect(res.body.cool).to.equal(card.cool);
+            expect(res.body.largeness).to.equal(card.largeness);
+            expect(res.body.handsome).to.equal(card.handsome);
+            expect(res.body.alignment).to.equal(card.alignment);
+            done();
+          });
+      });
+    });
   });
 });

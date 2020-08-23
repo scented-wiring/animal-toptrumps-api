@@ -18,3 +18,10 @@ exports.list = (req, res) => {
     res.status(200).json(cards);
   });
 };
+
+exports.getCardById = (req, res) => {
+  const { cardId } = req.params;
+  Card.findByPk(cardId).then((card) => {
+    res.status(200).json(card);
+  });
+};
