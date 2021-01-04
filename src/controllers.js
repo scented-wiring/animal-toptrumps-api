@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         "This card is too powerful! The maximum total for the numerical parameters is 25.",
     });
   } else {
-    Card.create(req.body).then((artist) => res.status(201).json(artist));
+    Card.create(req.body).then((card) => res.status(201).json(card));
   }
 };
 
