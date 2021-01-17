@@ -51,3 +51,13 @@ exports.deleteCard = (req, res) => {
     }
   });
 };
+
+exports.deleteCards = (req, res) => {
+  Card.destroy({ where: {} }).then((deletedCards) => {
+    if (!deletedCards) {
+      res.status(404).json({ error: "No cards found!" });
+    } else {
+      res.status(204).json({ success: "Cards deleted" });
+    }
+  });
+};

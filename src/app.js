@@ -22,5 +22,6 @@ app.get("/cards", controllers.list);
 app.get("/cards/:cardId", controllers.getCardById);
 app.patch("/cards/:cardId", controllers.updateCard);
 app.delete("/cards/:cardId", controllers.deleteCard);
+app.delete("/cards", controllers.deleteCards);
 
 module.exports = app;
