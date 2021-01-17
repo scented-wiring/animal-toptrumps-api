@@ -9,6 +9,7 @@ To run the API:
 - Create/run a [docker](https://www.docker.com/) container using the command:
 
   `docker run -d -p 3307:3306 --name animal_top_trumps_mysql -e password=password mysql`
+
   (You may set your own password if you wish)
 
 - Create a .env file in the root of the project folder with the following content:
